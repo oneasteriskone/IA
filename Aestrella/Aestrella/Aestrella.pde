@@ -1,5 +1,10 @@
+//TODO://
+// Add coordinates
+// An actual tree
+// Leave path
+// Pre-calculate the path ( using the nodes.) 
 
-ArrayList<PVector> lista;
+
 ArrayList<PVector> visitados;
 ArrayList<PVector> bestPath;
 
@@ -11,7 +16,8 @@ int goalY;
 PImage img;
 
 boolean validMove(int x, int y){
-  if(!visitados.contains(new PVector(x,y)) && get(x,y) == -1){
+  print(get(x,y));
+  if(!visitados.contains(new PVector(x,y)) &&  get(x,y) == -1){
     return true;
   }
   return false;
@@ -22,12 +28,13 @@ void aestrella(int startx, int starty, int goalx, int goaly){
   int currentx = startx;
   int currenty = starty;
   
-  int count = 0;
+  int count = 0;// <<<PRUEBA
   
-  while(count < 100){
+  while(count < 500){ // <<<PRUEBA
     if( currentx == goalx && currenty == goaly){
       //create path goal. follow your dreams.
       print(visitados);
+      count = 501;
       //return true;
     }
     
@@ -40,26 +47,35 @@ void aestrella(int startx, int starty, int goalx, int goaly){
     print(currentx+"\n");
     print(currenty+"\n");
     
+    int movimiento = 20;
+    
+    // Se selecciona el siguiente moviemiento con la mejor distancia.
     // es horrible! 
-    if( validMove(currentx-1, currenty) && dist(currentx-1, currenty, goalx, goaly) < bestDist){ //izq
-      bestDist = dist(currentx-1, currenty, goalx, goaly);
-      bestVecino = new PVector(currentx-1, currenty);
+    if( validMove(currentx-movimiento, currenty) && dist(currentx-movimiento, currenty, goalx, goaly) < bestDist){ //izq
+      bestDist = dist(currentx-movimiento, currenty, goalx, goaly);
+      bestVecino = new PVector(currentx-5, currenty);
       print("izq");
     }
-    if( validMove(currentx+1, currenty)&& dist(currentx+1, currenty, goalx, goaly) < bestDist){ //derecha
-      bestDist = dist(currentx+1, currenty, goalx, goaly);
-      bestVecino = new PVector(currentx+1, currenty);
+    if( validMove(currentx+movimiento, currenty)&& dist(currentx+movimiento, currenty, goalx, goaly) < bestDist){ //derecha
+      bestDist = dist(currentx+movimiento, currenty, goalx, goaly);
+      bestVecino = new PVector(currentx+movimiento, currenty);
       print("der");
     } 
-    if(  validMove(currentx, currenty-1) && dist(currentx, currenty-1, goalx, goaly) < bestDist){ //abajo
-      bestDist = dist(currentx, currenty-1, goalx, goaly);
-      bestVecino = new PVector(currentx, currenty-1);
+    if(  validMove(currentx, currenty-movimiento) && dist(currentx, currenty-movimiento, goalx, goaly) < bestDist){ //abajo
+      bestDist = dist(currentx, currenty-movimiento, goalx, goaly);
+      bestVecino = new PVector(currentx, currenty-movimiento);
       print("abajo");
     }
-    if(  validMove(currentx, currenty+1) && dist(currentx, currenty+1, goalx, goaly) < bestDist){ //arriba
-      bestDist = dist(currentx, currenty+1, goalx, goaly);
-      bestVecino = new PVector(currentx, currenty+1);
+    if(  validMove(currentx, currenty+movimiento) && dist(currentx, currenty+movimiento, goalx, goaly) < bestDist){ //arriba
+      bestDist = dist(currentx, currenty+movimiento, goalx, goaly);
+      bestVecino = new PVector(currentx, currenty+movimiento);
       print("arr");
+    }
+    
+    if(bestVecino == null){
+      print("FAIL");
+      break;
+      
     }
     
     print(bestVecino);
@@ -69,8 +85,8 @@ void aestrella(int startx, int starty, int goalx, int goaly){
     
     
     visitados.add(bestVecino);
-    print((int) bestVecino.x+"\n");
-    print((int) bestVecino.y+"\n");
+    //print((int) bestVecino.x+"\n");
+    //print((int) bestVecino.y+"\n");
     
     count++;
   }
@@ -79,17 +95,28 @@ void aestrella(int startx, int starty, int goalx, int goaly){
 
 
 void setup(){
-  size(465, 465);
-  lista = new ArrayList<PVector>();
+  size(420, 420);
   visitados = new ArrayList<PVector>();
-  bestPath = new ArrayList<PVector>();
-  startX = (int) random(465);
-  startY = (int) random(465);
-  goalX = (int) random(465);
-  goalY = (int) random(465);
+  
+  bestPath = new ArrayList<PVector>(); // un-used... 
+  
+  startX = (int) random(5,420);
+  startY = (int) random(5,420);
+  while(validMove(startX,startY)){
+    startX = (int) random(5,420);
+    startY = (int) random(5,420);
+  }
+  
+  goalX = (int) random(5,420);
+  goalY = (int) random(5,420);
+  while(validMove(goalX,goalY)){
+    goalX = (int) random(5,420);
+    goalY = (int) random(5,420);
+  }
+  
   
   img = loadImage("laberinto.jpg");
-  image(img, 0, 0);
+  image(img, 20, 20);
   
   
   print("start "+startX+" "+startY);
@@ -106,14 +133,15 @@ void setup(){
   int i = 0; 
 
 void draw(){
-  image(img, 0, 0);
+  image(img, -20, -20);
   
   fill(204, 102, 0);
   rect(goalX,goalY, 5,5);
   
+  fill(94);
   
-    rect(visitados.get(i).x, visitados.get(i).y, 50, 50);
-    i++;
+  rect(visitados.get(i).x, visitados.get(i).y, 20, 20);
+  i++;
   
     // TEST
     //color c = get(x, y);
