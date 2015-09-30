@@ -35,7 +35,7 @@ void draw(){
 }
 
 void arbolBusqueda(Tree problema, Estrategia estrategia){
-
+  print(1);
 }
 
 void pintarAgente(float x, float y){

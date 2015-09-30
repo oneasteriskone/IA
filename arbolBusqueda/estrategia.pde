@@ -1,3 +1,6 @@
 class Estrategia{
 
+    public Estrategia(){
+    }
+  
 }
