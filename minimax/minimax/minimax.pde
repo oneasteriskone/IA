@@ -1,18 +1,6 @@
+// tic tac toe by http://www.openprocessing.org/sketch/77976
 
 tree tree;
-
-//void setup(){
-//  tree = new tree();
-//  buildPlayTree(tree);
-  
-//  size(420, 420);
-//}
-
-//void draw(){
-
-//}
-
-
 Cell[][] board;
 int cols = 3;
 int rows = 3;
@@ -24,9 +12,20 @@ int full = 9;
 
 void setup() {
   
+  
+  
   // Create the play tree
   tree = new tree();
   buildPlayTree(tree);
+  
+  //print(tree);
+  
+  
+  
+  
+  
+  
+  
   
   size(400, 400);
   smooth(); 
