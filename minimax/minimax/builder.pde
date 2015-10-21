@@ -5,14 +5,9 @@
     calculatePosibilities(start, t.root);
     
     //Are more posibilities, possible? 
-    boolean morePossibilities = true;
-    while(morePossibilities){
-      iterateNodesForPosibilities()
+    iterateNodesForPosibilities(t.root); //<>//
       
-    }
-    
-    
-    
+   
     print("Amount Of Children"+t.root.getChildAmount());
  }
  
@@ -23,7 +18,7 @@
       amountOfPosibilities = calculatePosibilities(n.movimiento, n );
     }
     if(amountOfPosibilities > 0){
-        iterateNodesForPosibilities();
+        iterateNodesForPosibilities(ne.next());
     } 
     
     return amountOfPosibilities;
@@ -32,6 +27,15 @@
  int calculatePosibilities(int movimiento, node n){
    int[][] movimientoParsed = intToPosition(movimiento);
    print(movimientoParsed[0][0]);
+   print(movimientoParsed[1][0]);
+   print(movimientoParsed[2][0]);
+   print(movimientoParsed[0][1]);
+   print(movimientoParsed[1][1]);
+   print(movimientoParsed[2][1]);
+   print(movimientoParsed[0][2]);
+   print(movimientoParsed[1][2]);
+   print(movimientoParsed[2][2]);
+   print("\n");
    for(int i = 0; i <= 2; i++){
      for(int j = 0; j <= 2; j++){
        if(movimientoParsed[j][i] == 0){
@@ -39,7 +43,7 @@
          //print(movimientoParsed[j][i]);
          int[][] newMove = movimientoParsed;
          newMove[j][i] = 1;
-         n.addChild(new node(positionsToInt(newMove), n));
+         n.addChild(new node(positionsToInt(newMove), n)); //<>//
        }
        //}else{
        //   print("No new movement in "+j+" "+i);
@@ -47,6 +51,7 @@
        //print("\n");
      }
    }
+   n.evaluated = true;
    return n.getChildAmount();
  }
  
@@ -127,6 +132,6 @@
    
    
    
-   return res; //<>//
+   return res;
  }
  
