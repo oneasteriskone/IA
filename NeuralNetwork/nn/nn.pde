@@ -27,7 +27,7 @@ void setup() {
 // Make a random ArrayList of targets to steer towards
 void makeTargets() {
   targets = new ArrayList<PVector>();
-  for (int i = 0; i <8; i++) {
+  for (int i = 0; i <1; i++) {
     targets.add(new PVector(random(width), random(height)));
   }
 }

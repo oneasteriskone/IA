@@ -29,7 +29,7 @@ class Vehicle {
   void update() {
     // Update velocity
     
-    
+    //velocity.add(acceleration);
     
     velocity.add(acceleration.add(acceleration)); //Trying to make it faster. 
     
@@ -105,6 +105,6 @@ class Vehicle {
     endShape(CLOSE);
     popMatrix();
     
-    delay(500);
+    //delay(100);
   }
 }
